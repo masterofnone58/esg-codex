@@ -27,6 +27,21 @@
 
         <section class="store-quick-grid" id="store-quick-grid"></section>
 
+        <section class="panel store-status-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Capture status</p>
+              <h2 id="connection-state">Online and ready</h2>
+            </div>
+            <button id="connection-toggle" class="secondary-button" type="button">Work offline</button>
+          </div>
+          <p class="lede store-status-copy" id="connection-copy"></p>
+          <div class="queue-actions">
+            <span class="inline-pill" id="queue-pill">0 queued</span>
+            <button id="sync-queue-button" class="secondary-button" type="button">Sync queued uploads</button>
+          </div>
+        </section>
+
         <section class="store-mobile-layout">
           <article class="panel panel-form">
             <div class="panel-head">
@@ -91,7 +106,13 @@
                 >Awaiting weekly collection from regional recycler.</textarea>
               </label>
 
-              <button type="submit" class="primary-button">Upload evidence</button>
+              <div class="sticky-submit-bar">
+                <div class="sticky-copy">
+                  <strong id="submit-state-label">Ready to upload</strong>
+                  <span id="submit-state-copy">Online sync available now.</span>
+                </div>
+                <button id="store-submit-button" type="submit" class="primary-button">Upload evidence</button>
+              </div>
             </form>
           </article>
 
@@ -103,6 +124,16 @@
               </div>
             </div>
             <div id="evidence-list" class="simple-list media-list"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Queued uploads</p>
+                <h2>Waiting to sync</h2>
+              </div>
+            </div>
+            <div id="queue-list" class="simple-list"></div>
           </article>
         </section>
       </main>

@@ -246,6 +246,11 @@ textarea {
   top: 12px;
 }
 
+.store-status-panel {
+  display: grid;
+  gap: 12px;
+}
+
 .panel-head {
   display: flex;
   justify-content: space-between;
@@ -293,6 +298,15 @@ textarea {
   gap: 8px;
 }
 
+.app-shell-store .capture-form input,
+.app-shell-store .capture-form select,
+.app-shell-store .capture-form textarea,
+.app-shell-store .tenant-select,
+.app-shell-store .secondary-button,
+.app-shell-store .primary-button {
+  min-height: 54px;
+}
+
 .capture-form textarea {
   resize: vertical;
 }
@@ -314,6 +328,46 @@ textarea {
 .secondary-button:hover {
   background: var(--ink);
   color: var(--surface);
+}
+
+.queue-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.store-status-copy {
+  max-width: none;
+}
+
+.sticky-submit-bar {
+  position: sticky;
+  bottom: 10px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 253, 249, 0.96);
+}
+
+.sticky-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.sticky-copy strong {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+.sticky-copy span {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .simple-list {
@@ -450,6 +504,13 @@ textarea {
   line-height: 1;
 }
 
+.empty-state {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .mono {
   font-family: "SFMono-Regular", "Menlo", monospace;
 }
@@ -500,5 +561,18 @@ textarea {
   .simple-item,
   .supplier-button {
     padding: 14px;
+  }
+
+  .sticky-submit-bar {
+    grid-template-columns: 1fr;
+    bottom: 6px;
+  }
+
+  .sticky-submit-bar .primary-button {
+    width: 100%;
+  }
+
+  .queue-actions {
+    display: grid;
   }
 }

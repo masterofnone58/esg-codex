@@ -273,6 +273,7 @@ const tenants = {
 const page = document.body.dataset.page || "home";
 const routePrefix = document.body.dataset.routePrefix || ".";
 const initialTenantId = new URLSearchParams(window.location.search).get("tenant");
+const storagePrefix = "tracelight.store";
 
 const state = {
   tenantId: tenants[initialTenantId] ? initialTenantId : "evergreen",
@@ -286,8 +287,17 @@ const els = {
   roleCardGrid: document.getElementById("role-card-grid"),
   storeQuickGrid: document.getElementById("store-quick-grid"),
   storeName: document.getElementById("store-name"),
+  connectionState: document.getElementById("connection-state"),
+  connectionCopy: document.getElementById("connection-copy"),
+  connectionToggle: document.getElementById("connection-toggle"),
+  queuePill: document.getElementById("queue-pill"),
+  syncQueueButton: document.getElementById("sync-queue-button"),
   evidenceList: document.getElementById("evidence-list"),
+  queueList: document.getElementById("queue-list"),
   storeForm: document.getElementById("store-form"),
+  submitStateLabel: document.getElementById("submit-state-label"),
+  submitStateCopy: document.getElementById("submit-state-copy"),
+  storeSubmitButton: document.getElementById("store-submit-button"),
   metricGrid: document.getElementById("metric-grid"),
   reviewList: document.getElementById("review-list"),
   logisticsForm: document.getElementById("logistics-form"),
@@ -319,8 +329,87 @@ function activeTenant() {
   return tenants[state.tenantId];
 }
 
+function readJson(key, fallbackValue) {
+  try {
+    const raw = window.localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallbackValue;
+  } catch {
+    return fallbackValue;
+  }
+}
+
+function writeJson(key, value) {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    // Ignore storage issues in static demo mode.
+  }
+}
+
+function queueStorageKey(tenantId) {
+  return `${storagePrefix}.queue.${tenantId}`;
+}
+
+function offlineStorageKey(tenantId) {
+  return `${storagePrefix}.offline.${tenantId}`;
+}
+
+function currentStoreQueue() {
+  return readJson(queueStorageKey(state.tenantId), []);
+}
+
+function setCurrentStoreQueue(queue) {
+  writeJson(queueStorageKey(state.tenantId), queue);
+}
+
+function currentStoreOffline() {
+  return readJson(offlineStorageKey(state.tenantId), false) === true;
+}
+
+function setCurrentStoreOffline(isOffline) {
+  writeJson(offlineStorageKey(state.tenantId), isOffline === true);
+}
+
 function formatKg(value) {
   return `${Number(value).toFixed(1)} kg`;
+}
+
+function emptyStateMarkup(copy) {
+  return `<div class="empty-state">${copy}</div>`;
+}
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
+async function buildStoreSubmission(form) {
+  const tenant = activeTenant();
+  const file = form.get("photo");
+  let image = placeholderSvg("#d8ddd4", "#71806e");
+
+  if (file instanceof File && file.size > 0) {
+    try {
+      image = await readFileAsDataUrl(file);
+    } catch {
+      image = placeholderSvg("#d8ddd4", "#71806e");
+    }
+  }
+
+  return {
+    title: `${form.get("materialType")} upload`,
+    materialType: String(form.get("materialType")),
+    weightKg: Number(form.get("weightKg")),
+    zone: String(form.get("zone")),
+    store: tenant.store.name,
+    note: String(form.get("notes")),
+    image,
+    date: new Date().toISOString().slice(0, 16).replace("T", " "),
+  };
 }
 
 function routeFor(roleId) {
@@ -437,13 +526,15 @@ function renderHome() {
 function renderStorePage() {
   if (!els.storeQuickGrid || !els.storeName || !els.evidenceList) return;
   const tenant = activeTenant();
+  const queue = currentStoreQueue();
+  const isOffline = currentStoreOffline();
 
   els.storeName.textContent = `${tenant.store.name} • ${tenant.store.manager}`;
 
   els.storeQuickGrid.innerHTML = [
-    { label: "Submitted today", value: tenant.store.submittedToday, helper: "Uploads synced" },
+    { label: "Synced today", value: tenant.store.submittedToday, helper: "Uploads live in portal" },
     { label: "Still needed", value: tenant.store.pendingToday, helper: "Open capture tasks" },
-    { label: "Latest sync", value: "2m", helper: tenant.store.shiftWindow },
+    { label: "Queued", value: queue.length, helper: isOffline ? "Waiting for connection" : "Ready to sync" },
   ]
     .map(
       (item) => `
@@ -456,9 +547,46 @@ function renderStorePage() {
     )
     .join("");
 
+  if (els.connectionState) {
+    els.connectionState.textContent = isOffline ? "Offline capture mode" : "Online and ready";
+  }
+
+  if (els.connectionCopy) {
+    els.connectionCopy.textContent = isOffline
+      ? "New uploads will stay on this device until you reconnect. You can continue capturing photos and material details normally."
+      : queue.length
+        ? `${queue.length} upload${queue.length === 1 ? "" : "s"} waiting. Sync them now or keep collecting.`
+        : "Everything you submit now will sync directly into the tenant evidence list.";
+  }
+
+  if (els.connectionToggle) {
+    els.connectionToggle.textContent = isOffline ? "Go online" : "Work offline";
+  }
+
+  if (els.queuePill) {
+    els.queuePill.textContent = `${queue.length} queued`;
+  }
+
+  if (els.syncQueueButton) {
+    els.syncQueueButton.hidden = isOffline || queue.length === 0;
+    els.syncQueueButton.disabled = isOffline || queue.length === 0;
+  }
+
+  if (els.submitStateLabel) {
+    els.submitStateLabel.textContent = isOffline ? "Queue on this device" : "Upload to portal";
+  }
+
+  if (els.submitStateCopy) {
+    els.submitStateCopy.textContent = isOffline
+      ? "Your entry will be saved locally until you reconnect."
+      : "Send this evidence straight into the ESG review flow.";
+  }
+
+  if (els.storeSubmitButton) {
+    els.storeSubmitButton.textContent = isOffline ? "Save to queue" : "Upload evidence";
+  }
+
   els.evidenceList.innerHTML = tenant.evidence
-    .slice()
-    .reverse()
     .map(
       (item) => `
         <article class="simple-item media-item">
@@ -477,6 +605,27 @@ function renderStorePage() {
       `
     )
     .join("");
+
+  if (els.queueList) {
+    els.queueList.innerHTML = queue.length
+      ? queue
+          .map(
+            (item) => `
+              <article class="simple-item">
+                <strong>${item.title}</strong>
+                <div class="meta-row">
+                  <span>${item.materialType}</span>
+                  <span>${formatKg(item.weightKg)}</span>
+                  <span>${item.zone}</span>
+                </div>
+                <p>${item.note}</p>
+                <span>${item.date}</span>
+              </article>
+            `
+          )
+          .join("")
+      : emptyStateMarkup("No queued uploads. When the device is offline, new captures will appear here until you sync them.");
+  }
 }
 
 function renderAdminPage() {
@@ -670,31 +819,46 @@ if (els.tenantSelect) {
 }
 
 if (els.storeForm) {
-  els.storeForm.addEventListener("submit", (event) => {
+  els.storeForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const tenant = activeTenant();
-    const file = form.get("photo");
-    const image =
-      file && file.size > 0
-        ? URL.createObjectURL(file)
-        : placeholderSvg("#d8ddd4", "#71806e");
+    const submission = await buildStoreSubmission(form);
+    const isOffline = currentStoreOffline();
 
-    tenant.evidence.unshift({
-      title: `${form.get("materialType")} upload`,
-      materialType: String(form.get("materialType")),
-      weightKg: Number(form.get("weightKg")),
-      zone: String(form.get("zone")),
-      store: tenant.store.name,
-      note: String(form.get("notes")),
-      image,
-      date: new Date().toISOString().slice(0, 16).replace("T", " "),
-    });
+    if (isOffline) {
+      const queue = currentStoreQueue();
+      queue.unshift(submission);
+      setCurrentStoreQueue(queue);
+    } else {
+      tenant.evidence.unshift(submission);
+      tenant.store.submittedToday += 1;
+    }
 
-    tenant.store.submittedToday += 1;
     tenant.store.pendingToday = Math.max(0, tenant.store.pendingToday - 1);
     renderStorePage();
     event.currentTarget.reset();
+  });
+}
+
+if (els.connectionToggle) {
+  els.connectionToggle.addEventListener("click", () => {
+    setCurrentStoreOffline(!currentStoreOffline());
+    renderStorePage();
+  });
+}
+
+if (els.syncQueueButton) {
+  els.syncQueueButton.addEventListener("click", () => {
+    if (currentStoreOffline()) return;
+    const queue = currentStoreQueue();
+    if (!queue.length) return;
+
+    const tenant = activeTenant();
+    tenant.evidence.unshift(...queue);
+    tenant.store.submittedToday += queue.length;
+    setCurrentStoreQueue([]);
+    renderStorePage();
   });
 }
 
