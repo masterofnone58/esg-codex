@@ -8,14 +8,10 @@
   </head>
   <body>
     <div class="page-shell">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">Multi-tenant ESG SaaS MVP</p>
-          <h1>TraceLight ESG Cloud</h1>
-          <p class="subcopy">
-            Collect store evidence, log logistics data, generate compliance-ready
-            ESG reports, and let executives drill into supply-chain impact.
-          </p>
+      <header class="masthead">
+        <div class="brand-lockup">
+          <p class="brand-mark">TraceLight</p>
+          <p class="brand-subline">ESG cloud platform for tenant-scale reporting</p>
         </div>
         <div class="topbar-panel">
           <label class="field-label" for="tenant-select">Active tenant</label>
@@ -24,26 +20,52 @@
         </div>
       </header>
 
-      <section class="hero-grid">
-        <article class="hero-card hero-card-primary">
-          <p class="eyebrow">Operating model</p>
-          <h2>One platform, three working views</h2>
-          <p>
-            Store managers capture evidence on mobile. ESG admins validate inputs,
-            manage logistics data, and publish reports. Executives track the
-            supply chain and inspect carbon, evidence, and supplier credentials.
+      <section class="hero-stage">
+        <article class="hero-copy">
+          <p class="eyebrow">Sustainability dispatch</p>
+          <h1>TraceLight ESG Cloud</h1>
+          <p class="hero-deck">
+            Collect material evidence at store level, shape compliance-ready ESG
+            reporting, and reveal the full supply-chain story in one elegant
+            tenant portal.
           </p>
+          <p class="hero-synopsis" id="hero-synopsis"></p>
           <div class="persona-switch" id="persona-switch"></div>
         </article>
-        <article class="hero-card hero-card-secondary">
-          <p class="eyebrow">MVP pillars</p>
-          <ul class="pill-list">
-            <li>Responsive browser portal for desktop and mobile</li>
-            <li>Tenant-specific dashboards and access boundaries</li>
-            <li>Evidence capture with photos, material type, and weight</li>
-            <li>Admin reporting workspace for compliance output</li>
-            <li>Executive drill-down into suppliers and certificates</li>
-          </ul>
+
+        <article class="hero-media card">
+          <div class="hero-image-wrap">
+            <img id="hero-image" alt="Tenant sustainability visual" />
+          </div>
+          <div class="hero-caption">
+            <p class="eyebrow">Featured evidence</p>
+            <h2 id="hero-caption-title"></h2>
+            <p id="hero-caption-copy"></p>
+          </div>
+        </article>
+      </section>
+
+      <section class="chapter-strip">
+        <article class="chapter-card">
+          <span class="chapter-index">01</span>
+          <div>
+            <p class="chapter-title">Capture</p>
+            <p class="chapter-copy">Mobile evidence from stores and facilities</p>
+          </div>
+        </article>
+        <article class="chapter-card">
+          <span class="chapter-index">02</span>
+          <div>
+            <p class="chapter-title">Compose</p>
+            <p class="chapter-copy">Operational review, logistics, and reporting</p>
+          </div>
+        </article>
+        <article class="chapter-card">
+          <span class="chapter-index">03</span>
+          <div>
+            <p class="chapter-title">Reveal</p>
+            <p class="chapter-copy">Executive drill-down by supplier and evidence</p>
+          </div>
         </article>
       </section>
 
@@ -51,12 +73,15 @@
 
       <main class="workspace">
         <section class="view-panel active" id="store-view" data-view="store">
-          <div class="section-heading">
+          <div class="section-heading editorial">
             <div>
-              <p class="eyebrow">Persona</p>
-              <h2>Store manager mobile capture</h2>
+              <p class="eyebrow">Chapter one</p>
+              <h2>Store capture on the move</h2>
             </div>
-            <span class="screen-tag">Mobile-first workflow</span>
+            <p class="section-note">
+              A camera-first browser experience designed for fast evidence capture
+              inside a live retail environment.
+            </p>
           </div>
           <div class="store-layout">
             <article class="phone-frame">
@@ -120,12 +145,13 @@
               </form>
             </article>
 
-            <article class="card">
-              <div class="section-heading compact">
+            <article class="card evidence-gallery-card">
+              <div class="section-heading compact editorial-compact">
                 <div>
                   <p class="eyebrow">Uploaded evidence</p>
-                  <h3>Latest store submissions</h3>
+                  <h3>Recent material observations</h3>
                 </div>
+                <p class="section-note">Each upload remains linked to place, weight, and visual proof.</p>
               </div>
               <div id="evidence-list" class="evidence-list"></div>
             </article>
@@ -133,29 +159,32 @@
         </section>
 
         <section class="view-panel" id="admin-view" data-view="admin">
-          <div class="section-heading">
+          <div class="section-heading editorial">
             <div>
-              <p class="eyebrow">Persona</p>
-              <h2>ESG administrator portal</h2>
+              <p class="eyebrow">Chapter two</p>
+              <h2>The reporting atelier</h2>
             </div>
-            <span class="screen-tag">Desktop command center</span>
+            <p class="section-note">
+              A composed workspace for evidence review, logistics logging, and
+              draft report preparation before formal publication.
+            </p>
           </div>
           <div class="admin-grid">
             <article class="card metrics-card">
-              <div class="section-heading compact">
+              <div class="section-heading compact editorial-compact">
                 <div>
                   <p class="eyebrow">Tenant snapshot</p>
-                  <h3>MVP ESG metrics</h3>
+                  <h3>Reporting indicators</h3>
                 </div>
               </div>
               <div id="metric-grid" class="metric-grid"></div>
             </article>
 
             <article class="card">
-              <div class="section-heading compact">
+              <div class="section-heading compact editorial-compact">
                 <div>
                   <p class="eyebrow">Operational input</p>
-                  <h3>Log logistics data</h3>
+                  <h3>Log logistics movement</h3>
                 </div>
               </div>
               <form id="logistics-form" class="logistics-form">
@@ -191,10 +220,10 @@
             </article>
 
             <article class="card report-card">
-              <div class="section-heading compact">
+              <div class="section-heading compact editorial-compact">
                 <div>
                   <p class="eyebrow">Compliance output</p>
-                  <h3>ESG report workspace</h3>
+                  <h3>Draft disclosure narrative</h3>
                 </div>
                 <button id="generate-report" class="primary-button">Generate draft report</button>
               </div>
@@ -208,26 +237,29 @@
         </section>
 
         <section class="view-panel" id="executive-view" data-view="executive">
-          <div class="section-heading">
+          <div class="section-heading editorial">
             <div>
-              <p class="eyebrow">Persona</p>
-              <h2>Executive ESG dashboard</h2>
+              <p class="eyebrow">Chapter three</p>
+              <h2>Supply chain, revealed</h2>
             </div>
-            <span class="screen-tag">Supply-chain drill down</span>
+            <p class="section-note">
+              Carbon contribution, evidence imagery, and supplier credentials are
+              surfaced as one continuous executive story.
+            </p>
           </div>
           <div class="executive-grid">
             <article class="card">
-              <div class="section-heading compact">
+              <div class="section-heading compact editorial-compact">
                 <div>
                   <p class="eyebrow">Network view</p>
-                  <h3>Supply chain carbon map</h3>
+                  <h3>Supply chain chapters</h3>
                 </div>
               </div>
               <div id="supply-chain-list" class="supply-chain-list"></div>
             </article>
 
             <article class="card detail-card">
-              <div class="section-heading compact">
+              <div class="section-heading compact editorial-compact">
                 <div>
                   <p class="eyebrow">Drill down</p>
                   <h3 id="detail-title">Select a supply-chain node</h3>

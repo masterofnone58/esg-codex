@@ -274,6 +274,10 @@ const els = {
   tenantNote: document.getElementById("tenant-note"),
   personaSwitch: document.getElementById("persona-switch"),
   summaryStrip: document.getElementById("summary-strip"),
+  heroSynopsis: document.getElementById("hero-synopsis"),
+  heroImage: document.getElementById("hero-image"),
+  heroCaptionTitle: document.getElementById("hero-caption-title"),
+  heroCaptionCopy: document.getElementById("hero-caption-copy"),
   storeName: document.getElementById("store-name"),
   evidenceList: document.getElementById("evidence-list"),
   metricGrid: document.getElementById("metric-grid"),
@@ -329,7 +333,7 @@ function renderSummary() {
   const tenant = activeTenant();
   els.tenantNote.textContent = `${tenant.industry}. ${tenant.footprint}. Reporting cycle: ${tenant.reportingCycle}.`;
   const summaryCards = [
-    { label: "Carbon footprint", value: tenant.kpis.carbon, helper: "Across tenant network" },
+    { label: "Carbon footprint", value: tenant.kpis.carbon, helper: "Across the mapped tenant network" },
     { label: "Sites reporting", value: tenant.kpis.storesReporting, helper: "Store and facility participation" },
     { label: "Supplier coverage", value: tenant.kpis.supplierCoverage, helper: "Suppliers with mapped credentials" },
     { label: "Evidence linked", value: tenant.kpis.evidenceLinked, helper: "Photos, certificates, and logs" },
@@ -340,6 +344,17 @@ function renderSummary() {
         `<article class="summary-card"><p class="eyebrow">${item.label}</p><strong>${item.value}</strong><span>${item.helper}</span></article>`
     )
     .join("");
+}
+
+function renderHero() {
+  const tenant = activeTenant();
+  const featuredEvidence = tenant.evidence[0];
+  els.heroSynopsis.textContent =
+    `${tenant.name} brings together store evidence, logistics signals, and supplier credentials for ${tenant.footprint.toLowerCase()}.`;
+  els.heroImage.src = featuredEvidence.image;
+  els.heroCaptionTitle.textContent = featuredEvidence.title;
+  els.heroCaptionCopy.textContent =
+    `${featuredEvidence.store} documents ${featuredEvidence.materialType.toLowerCase()} at ${formatKg(featuredEvidence.weightKg)}. ${featuredEvidence.note}`;
 }
 
 function renderStoreView() {
@@ -420,7 +435,7 @@ function renderExecutiveView() {
   els.supplyChainList.innerHTML = tenant.suppliers
     .map(
       (supplier) => `
-        <button class="supply-node" data-node-id="${supplier.id}">
+        <button class="supply-node ${supplier.id === state.selectedNodeId ? "is-active" : ""}" data-node-id="${supplier.id}">
           <strong>${supplier.name}</strong>
           <span>${supplier.role} • ${supplier.region}</span>
           <span>${supplier.carbonTco2e} tCO2e • ${supplier.share} of tenant footprint • ${supplier.evidenceCount} evidence items</span>
@@ -549,6 +564,7 @@ function setActiveView() {
 function render() {
   renderTenants();
   renderPersonaSwitch();
+  renderHero();
   renderSummary();
   renderStoreView();
   renderAdminView();
