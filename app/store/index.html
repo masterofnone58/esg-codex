@@ -9,10 +9,11 @@
   <body data-page="store" data-route-prefix="..">
     <div class="app-shell app-shell-store">
       <header class="app-header">
-        <a class="brand" href="../">TraceLight</a>
+        <a id="brand-link" class="brand" href="../">TraceLight</a>
         <div class="header-controls">
-          <label class="field-label" for="tenant-select">Tenant</label>
+          <label class="field-label" for="tenant-select" data-i18n="common.tenant">Tenant</label>
           <select id="tenant-select" class="tenant-select"></select>
+          <div class="language-switcher" id="language-switcher"></div>
         </div>
       </header>
 
@@ -20,20 +21,20 @@
 
       <main class="page-stack page-stack-store">
         <section class="page-intro page-intro-store">
-          <p class="eyebrow">Store manager</p>
-          <h1>Capture today&apos;s material evidence.</h1>
+          <p class="eyebrow" data-i18n="store.intro.eyebrow">Store manager</p>
+          <h1 data-i18n="store.intro.title">Capture today&apos;s material evidence.</h1>
           <p class="lede" id="tenant-note"></p>
         </section>
 
         <section class="store-quick-grid" id="store-quick-grid"></section>
 
         <section class="panel store-status-panel">
-          <div class="panel-head">
-            <div>
-              <p class="eyebrow">Capture status</p>
-              <h2 id="connection-state">Online and ready</h2>
-            </div>
-            <button id="connection-toggle" class="secondary-button" type="button">Work offline</button>
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow" data-i18n="store.status.eyebrow">Capture status</p>
+                <h2 id="connection-state">Online and ready</h2>
+              </div>
+              <button id="connection-toggle" class="secondary-button" type="button">Work offline</button>
           </div>
           <p class="lede store-status-copy" id="connection-copy"></p>
           <div class="queue-actions">
@@ -46,15 +47,15 @@
           <article class="panel panel-form">
             <div class="panel-head">
               <div>
-                <p class="eyebrow">New upload</p>
+                <p class="eyebrow" data-i18n="store.new.eyebrow">New upload</p>
                 <h2 id="store-name">Store capture</h2>
               </div>
-              <span class="inline-pill">Mobile ready</span>
+              <span class="inline-pill" data-i18n="store.form.mobile_ready">Mobile ready</span>
             </div>
 
             <form id="store-form" class="capture-form">
               <label>
-                <span>Photo evidence</span>
+                <span data-i18n="store.form.photo">Photo evidence</span>
                 <input
                   id="photo-input"
                   name="photo"
@@ -65,18 +66,12 @@
               </label>
 
               <label>
-                <span>Material type</span>
-                <select name="materialType" required>
-                  <option value="Cardboard">Cardboard</option>
-                  <option value="Plastic film">Plastic film</option>
-                  <option value="Mixed recyclables">Mixed recyclables</option>
-                  <option value="Damaged goods">Damaged goods</option>
-                  <option value="Food waste">Food waste</option>
-                </select>
+                <span data-i18n="store.form.material">Material type</span>
+                <select name="materialType" required></select>
               </label>
 
               <label>
-                <span>Weight (kg)</span>
+                <span data-i18n="store.form.weight">Weight (kg)</span>
                 <input
                   name="weightKg"
                   type="number"
@@ -88,22 +83,24 @@
               </label>
 
               <label>
-                <span>Store zone</span>
+                <span data-i18n="store.form.zone">Store zone</span>
                 <input
                   name="zone"
                   type="text"
-                  value="Backroom recycling bay"
+                  placeholder="Backroom recycling bay"
+                  data-i18n-placeholder="store.form.zone_placeholder"
                   required
                 />
               </label>
 
               <label>
-                <span>Notes</span>
+                <span data-i18n="store.form.notes">Notes</span>
                 <textarea
                   name="notes"
                   rows="4"
                   placeholder="Add contamination, supplier, or handling notes"
-                >Awaiting weekly collection from regional recycler.</textarea>
+                  data-i18n-placeholder="store.form.notes_placeholder"
+                ></textarea>
               </label>
 
               <div class="sticky-submit-bar">
@@ -119,8 +116,8 @@
           <article class="panel">
             <div class="panel-head">
               <div>
-                <p class="eyebrow">Recent uploads</p>
-                <h2>What you already sent</h2>
+                <p class="eyebrow" data-i18n="store.recent.eyebrow">Recent uploads</p>
+                <h2 data-i18n="store.recent.title">What you already sent</h2>
               </div>
             </div>
             <div id="evidence-list" class="simple-list media-list"></div>
@@ -129,8 +126,8 @@
           <article class="panel">
             <div class="panel-head">
               <div>
-                <p class="eyebrow">Queued uploads</p>
-                <h2>Waiting to sync</h2>
+                <p class="eyebrow" data-i18n="store.queue.eyebrow">Queued uploads</p>
+                <h2 data-i18n="store.queue.title">Waiting to sync</h2>
               </div>
             </div>
             <div id="queue-list" class="simple-list"></div>

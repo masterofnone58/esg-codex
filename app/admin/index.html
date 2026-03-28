@@ -9,10 +9,11 @@
   <body data-page="admin" data-route-prefix="..">
     <div class="app-shell">
       <header class="app-header">
-        <a class="brand" href="../">TraceLight</a>
+        <a id="brand-link" class="brand" href="../">TraceLight</a>
         <div class="header-controls">
-          <label class="field-label" for="tenant-select">Tenant</label>
+          <label class="field-label" for="tenant-select" data-i18n="common.tenant">Tenant</label>
           <select id="tenant-select" class="tenant-select"></select>
+          <div class="language-switcher" id="language-switcher"></div>
         </div>
       </header>
 
@@ -20,8 +21,8 @@
 
       <main class="page-stack">
         <section class="page-intro">
-          <p class="eyebrow">ESG administrator</p>
-          <h1>Review incoming data and prepare disclosure output.</h1>
+          <p class="eyebrow" data-i18n="admin.intro.eyebrow">ESG administrator</p>
+          <h1 data-i18n="admin.intro.title">Review incoming data and prepare disclosure output.</h1>
           <p class="lede" id="tenant-note"></p>
         </section>
 
@@ -31,8 +32,8 @@
           <article class="panel">
             <div class="panel-head">
               <div>
-                <p class="eyebrow">Review queue</p>
-                <h2>What needs attention</h2>
+                <p class="eyebrow" data-i18n="admin.review.eyebrow">Review queue</p>
+                <h2 data-i18n="admin.review.title">What needs attention</h2>
               </div>
             </div>
             <div id="review-list" class="simple-list"></div>
@@ -41,43 +42,39 @@
           <article class="panel">
             <div class="panel-head">
               <div>
-                <p class="eyebrow">Logistics</p>
-                <h2>Log transport records</h2>
+                <p class="eyebrow" data-i18n="admin.logistics.eyebrow">Logistics</p>
+                <h2 data-i18n="admin.logistics.title">Log transport records</h2>
               </div>
             </div>
 
             <form id="logistics-form" class="logistics-form">
               <label>
-                <span>Lane</span>
+                <span data-i18n="admin.logistics.lane">Lane</span>
                 <input
                   name="lane"
                   type="text"
-                  value="Shenzhen DC to Hong Kong stores"
+                  placeholder="Shenzhen DC to Hong Kong stores"
+                  data-i18n-placeholder="admin.logistics.lane_placeholder"
                   required
                 />
               </label>
 
               <label>
-                <span>Transport mode</span>
-                <select name="mode">
-                  <option value="Electric van">Electric van</option>
-                  <option value="Diesel truck">Diesel truck</option>
-                  <option value="Ocean freight">Ocean freight</option>
-                  <option value="Air freight">Air freight</option>
-                </select>
+                <span data-i18n="admin.logistics.mode">Transport mode</span>
+                <select name="mode"></select>
               </label>
 
               <label>
-                <span>Distance (km)</span>
+                <span data-i18n="admin.logistics.distance">Distance (km)</span>
                 <input name="distanceKm" type="number" min="0" value="42" required />
               </label>
 
               <label>
-                <span>Load (kg)</span>
+                <span data-i18n="admin.logistics.load">Load (kg)</span>
                 <input name="loadKg" type="number" min="0" value="720" required />
               </label>
 
-              <button type="submit" class="secondary-button">Add record</button>
+              <button type="submit" class="secondary-button" data-i18n="admin.logistics.add_record">Add record</button>
             </form>
 
             <div id="logistics-list" class="simple-list table-list"></div>
@@ -87,10 +84,10 @@
         <section class="panel">
           <div class="panel-head">
             <div>
-              <p class="eyebrow">Draft report</p>
-              <h2>Compliance narrative</h2>
+              <p class="eyebrow" data-i18n="admin.report.eyebrow">Draft report</p>
+              <h2 data-i18n="admin.report.title">Compliance narrative</h2>
             </div>
-            <button id="generate-report" class="primary-button">Generate draft</button>
+            <button id="generate-report" class="primary-button" data-i18n="admin.report.generate">Generate draft</button>
           </div>
           <div id="report-output" class="report-output"></div>
         </section>

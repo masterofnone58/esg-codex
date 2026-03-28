@@ -10,6 +10,8 @@
   --accent-soft: #e7f0ec;
   --font-sans: "Helvetica Neue", "Arial Nova", "Segoe UI", sans-serif;
   --font-serif: "Didot", "Bodoni 72", "Times New Roman", serif;
+  --font-cjk-sans: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  --font-cjk-serif: "Songti TC", "Noto Serif TC", "PMingLiU", serif;
 }
 
 * {
@@ -19,6 +21,11 @@
 html {
   min-height: 100%;
   background: var(--bg);
+}
+
+html[lang^="zh"] {
+  --font-sans: var(--font-cjk-sans);
+  --font-serif: var(--font-cjk-serif);
 }
 
 body {
@@ -77,6 +84,29 @@ textarea {
   min-width: 220px;
 }
 
+.language-switcher {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.language-button {
+  min-width: 54px;
+  min-height: 44px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  padding: 9px 12px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.language-button.is-active {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
 .field-label,
 .eyebrow,
 .panel label span,
@@ -90,6 +120,19 @@ textarea {
 .eyebrow,
 .panel label span {
   color: var(--muted);
+}
+
+html[lang^="zh"] .field-label,
+html[lang^="zh"] .eyebrow,
+html[lang^="zh"] .panel label span,
+html[lang^="zh"] .role-link,
+html[lang^="zh"] .primary-button,
+html[lang^="zh"] .secondary-button,
+html[lang^="zh"] .language-button,
+html[lang^="zh"] .inline-pill,
+html[lang^="zh"] .meta-row {
+  letter-spacing: 0.08em;
+  text-transform: none;
 }
 
 .tenant-select,
@@ -543,6 +586,14 @@ textarea {
 
   .header-controls {
     width: 100%;
+  }
+
+  .language-switcher {
+    width: 100%;
+  }
+
+  .language-button {
+    flex: 1 1 0;
   }
 
   .page-intro h1 {

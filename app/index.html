@@ -9,10 +9,11 @@
   <body data-page="home" data-route-prefix=".">
     <div class="app-shell">
       <header class="app-header">
-        <a class="brand" href="./">TraceLight</a>
+        <a id="brand-link" class="brand" href="./">TraceLight</a>
         <div class="header-controls">
-          <label class="field-label" for="tenant-select">Tenant</label>
+          <label class="field-label" for="tenant-select" data-i18n="common.tenant">Tenant</label>
           <select id="tenant-select" class="tenant-select"></select>
+          <div class="language-switcher" id="language-switcher"></div>
         </div>
       </header>
 
@@ -20,8 +21,8 @@
 
       <main class="page-stack">
         <section class="page-intro">
-          <p class="eyebrow">ESG SaaS MVP</p>
-          <h1>Choose the right workspace for the job.</h1>
+          <p class="eyebrow" data-i18n="home.eyebrow">ESG SaaS MVP</p>
+          <h1 data-i18n="home.title">Choose the right workspace for the job.</h1>
           <p class="lede" id="tenant-note"></p>
         </section>
 

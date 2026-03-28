@@ -9,10 +9,11 @@
   <body data-page="executive" data-route-prefix="..">
     <div class="app-shell">
       <header class="app-header">
-        <a class="brand" href="../">TraceLight</a>
+        <a id="brand-link" class="brand" href="../">TraceLight</a>
         <div class="header-controls">
-          <label class="field-label" for="tenant-select">Tenant</label>
+          <label class="field-label" for="tenant-select" data-i18n="common.tenant">Tenant</label>
           <select id="tenant-select" class="tenant-select"></select>
+          <div class="language-switcher" id="language-switcher"></div>
         </div>
       </header>
 
@@ -20,8 +21,8 @@
 
       <main class="page-stack">
         <section class="page-intro">
-          <p class="eyebrow">Executive</p>
-          <h1>Track footprint, supplier exposure, and supporting proof.</h1>
+          <p class="eyebrow" data-i18n="executive.intro.eyebrow">Executive</p>
+          <h1 data-i18n="executive.intro.title">Track footprint, supplier exposure, and supporting proof.</h1>
           <p class="lede" id="tenant-note"></p>
         </section>
 
@@ -31,8 +32,8 @@
           <article class="panel">
             <div class="panel-head">
               <div>
-                <p class="eyebrow">Supplier ranking</p>
-                <h2>Top emitting components</h2>
+                <p class="eyebrow" data-i18n="executive.ranking.eyebrow">Supplier ranking</p>
+                <h2 data-i18n="executive.ranking.title">Top emitting components</h2>
               </div>
             </div>
             <div id="supplier-list" class="simple-list"></div>
@@ -41,7 +42,7 @@
           <article class="panel">
             <div class="panel-head">
               <div>
-                <p class="eyebrow">Supplier detail</p>
+                <p class="eyebrow" data-i18n="executive.detail.eyebrow">Supplier detail</p>
                 <h2 id="detail-title">Choose a supplier</h2>
               </div>
             </div>
