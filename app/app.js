@@ -6,12 +6,18 @@ const placeholderSvg = (label, toneA, toneB) =>
           <stop offset="0%" stop-color="${toneA}" />
           <stop offset="100%" stop-color="${toneB}" />
         </linearGradient>
+        <filter id="b" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="12" />
+        </filter>
       </defs>
-      <rect width="240" height="180" fill="url(#g)" rx="20" />
-      <circle cx="48" cy="44" r="16" fill="rgba(255,255,255,0.24)" />
-      <rect x="28" y="102" width="182" height="20" rx="10" fill="rgba(255,255,255,0.22)" />
-      <rect x="28" y="132" width="136" height="14" rx="7" fill="rgba(255,255,255,0.18)" />
-      <text x="28" y="82" fill="white" font-size="22" font-family="Avenir Next, Segoe UI, sans-serif">${label}</text>
+      <rect width="240" height="180" fill="url(#g)" />
+      <rect width="240" height="180" fill="rgba(255,248,240,0.22)" />
+      <ellipse cx="58" cy="54" rx="54" ry="46" fill="rgba(255,255,255,0.28)" filter="url(#b)" />
+      <ellipse cx="180" cy="128" rx="72" ry="58" fill="rgba(24,18,16,0.18)" filter="url(#b)" />
+      <rect x="38" y="28" width="112" height="132" fill="rgba(255,255,255,0.16)" />
+      <path d="M28 126 C66 98, 102 98, 144 126" fill="none" stroke="rgba(255,255,255,0.34)" stroke-width="1.2" />
+      <path d="M84 36 L84 156" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" />
+      <rect x="0" y="146" width="240" height="34" fill="rgba(17,17,17,0.12)" />
     </svg>`
   )}`;
 
