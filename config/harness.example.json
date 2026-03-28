@@ -1,0 +1,17 @@
+{
+  "output_dir": "runs",
+  "max_contract_rounds": 3,
+  "max_eval_retries": 2,
+  "thresholds": {
+    "product_depth": 7,
+    "functionality": 8,
+    "ux_clarity": 7,
+    "auditability": 8,
+    "code_quality": 7
+  },
+  "backend": {
+    "type": "dry-run",
+    "command": [],
+    "env": {}
+  }
+}
