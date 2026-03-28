@@ -1,4 +1,4 @@
-const placeholderSvg = (label, toneA, toneB) =>
+const placeholderSvg = (toneA, toneB) =>
   `data:image/svg+xml;utf8,${encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180">
       <defs>
@@ -6,18 +6,13 @@ const placeholderSvg = (label, toneA, toneB) =>
           <stop offset="0%" stop-color="${toneA}" />
           <stop offset="100%" stop-color="${toneB}" />
         </linearGradient>
-        <filter id="b" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="12" />
-        </filter>
       </defs>
       <rect width="240" height="180" fill="url(#g)" />
-      <rect width="240" height="180" fill="rgba(255,248,240,0.22)" />
-      <ellipse cx="58" cy="54" rx="54" ry="46" fill="rgba(255,255,255,0.28)" filter="url(#b)" />
-      <ellipse cx="180" cy="128" rx="72" ry="58" fill="rgba(24,18,16,0.18)" filter="url(#b)" />
-      <rect x="38" y="28" width="112" height="132" fill="rgba(255,255,255,0.16)" />
-      <path d="M28 126 C66 98, 102 98, 144 126" fill="none" stroke="rgba(255,255,255,0.34)" stroke-width="1.2" />
-      <path d="M84 36 L84 156" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" />
-      <rect x="0" y="146" width="240" height="34" fill="rgba(17,17,17,0.12)" />
+      <rect width="240" height="180" fill="rgba(255,255,255,0.18)" />
+      <rect x="24" y="22" width="88" height="136" fill="rgba(255,255,255,0.16)" />
+      <circle cx="176" cy="58" r="36" fill="rgba(255,255,255,0.16)" />
+      <path d="M124 122 C154 94, 182 94, 214 122" fill="none" stroke="rgba(255,255,255,0.34)" stroke-width="1.3" />
+      <rect x="0" y="142" width="240" height="38" fill="rgba(17,17,17,0.12)" />
     </svg>`
   )}`;
 
@@ -28,15 +23,18 @@ const tenants = {
     industry: "Retail and distribution",
     footprint: "128 stores across Hong Kong, Shenzhen, and Singapore",
     reportingCycle: "CSRD-aligned Q2 cycle",
+    store: {
+      name: "Causeway Bay Flagship",
+      manager: "May Wong",
+      pendingToday: 3,
+      submittedToday: 7,
+      shiftWindow: "14:00 collection cut-off",
+    },
     kpis: {
       carbon: "1,248 tCO2e",
       storesReporting: "121 / 128",
       supplierCoverage: "84%",
       evidenceLinked: "2,406 files",
-    },
-    store: {
-      name: "Causeway Bay Flagship",
-      manager: "May Wong",
     },
     evidence: [
       {
@@ -46,7 +44,7 @@ const tenants = {
         zone: "Backroom recycling bay",
         store: "Causeway Bay Flagship",
         note: "Sorted by packaging vendor before pickup.",
-        image: placeholderSvg("Cardboard", "#d6764b", "#cda35f"),
+        image: placeholderSvg("#d7c3a6", "#8e755d"),
         date: "2026-03-27 18:22",
       },
       {
@@ -56,7 +54,7 @@ const tenants = {
         zone: "Receiving dock",
         store: "Kowloon East Mall",
         note: "Clean wrap from inbound electronics shipments.",
-        image: placeholderSvg("Plastic film", "#5f816f", "#264f44"),
+        image: placeholderSvg("#d8ddd4", "#71806e"),
         date: "2026-03-27 14:40",
       },
     ],
@@ -90,20 +88,20 @@ const tenants = {
             title: "FSC Chain of Custody",
             expiry: "2027-11-01",
             issuer: "SGS",
-            image: placeholderSvg("FSC", "#527b6e", "#1f3b33"),
+            image: placeholderSvg("#d9d8cf", "#7f8c6d"),
           },
           {
             title: "ISO 14001",
             expiry: "2028-02-14",
             issuer: "Bureau Veritas",
-            image: placeholderSvg("ISO 14001", "#c88863", "#8a5133"),
+            image: placeholderSvg("#ddd1c3", "#9b7b61"),
           },
         ],
         evidence: [
           {
             title: "Recycled kraft roll inspection",
             note: "Moisture-resistant kraft paper pallets documented at source.",
-            image: placeholderSvg("Kraft roll", "#b97d4a", "#7c5635"),
+            image: placeholderSvg("#d8c0a1", "#8d694b"),
           },
         ],
       },
@@ -117,22 +115,22 @@ const tenants = {
         region: "Pearl River Delta",
         certificates: [
           {
-            title: "Smart Freight Centre verified emissions methodology",
+            title: "Verified emissions methodology",
             expiry: "2026-12-31",
             issuer: "Smart Freight Centre",
-            image: placeholderSvg("Freight cert", "#617f86", "#23404a"),
+            image: placeholderSvg("#d2d8dc", "#6b7f8e"),
           },
         ],
         evidence: [
           {
             title: "EV route audit",
             note: "Partial EV conversion completed on Hong Kong last-mile lanes.",
-            image: placeholderSvg("EV route", "#41765f", "#17392d"),
+            image: placeholderSvg("#d2ddd6", "#617a68"),
           },
           {
             title: "Load factor log",
             note: "Average load factor improved from 61% to 74% this quarter.",
-            image: placeholderSvg("Load factor", "#d18a58", "#8e5a34"),
+            image: placeholderSvg("#e0c7aa", "#9d734e"),
           },
         ],
       },
@@ -149,14 +147,14 @@ const tenants = {
             title: "SA8000 Social Accountability",
             expiry: "2027-06-18",
             issuer: "SAI",
-            image: placeholderSvg("SA8000", "#40685f", "#20423a"),
+            image: placeholderSvg("#ccd7d0", "#63796e"),
           },
         ],
         evidence: [
           {
             title: "Wastewater treatment photo set",
             note: "Treatment plant overhaul completed in February.",
-            image: placeholderSvg("Water treatment", "#689d9d", "#315a63"),
+            image: placeholderSvg("#d6dfde", "#6a8e93"),
           },
         ],
       },
@@ -168,15 +166,18 @@ const tenants = {
     industry: "Food manufacturing and retail",
     footprint: "56 stores and 4 regional kitchens",
     reportingCycle: "Annual sustainability statement",
+    store: {
+      name: "Central Kitchen 02",
+      manager: "Arjun Patel",
+      pendingToday: 2,
+      submittedToday: 5,
+      shiftWindow: "17:00 kitchen close audit",
+    },
     kpis: {
       carbon: "892 tCO2e",
       storesReporting: "52 / 56",
       supplierCoverage: "76%",
       evidenceLinked: "1,294 files",
-    },
-    store: {
-      name: "Central Kitchen 02",
-      manager: "Arjun Patel",
     },
     evidence: [
       {
@@ -186,7 +187,7 @@ const tenants = {
         zone: "Organic waste room",
         store: "Central Kitchen 02",
         note: "Separated for anaerobic digestion vendor pickup.",
-        image: placeholderSvg("Food waste", "#819d59", "#43552d"),
+        image: placeholderSvg("#dde1c6", "#7e8f5a"),
         date: "2026-03-27 19:05",
       },
       {
@@ -196,7 +197,7 @@ const tenants = {
         zone: "Dispatch bay",
         store: "Harbourfront Store",
         note: "Captured after weekend promotional teardown.",
-        image: placeholderSvg("Recyclables", "#608170", "#314b41"),
+        image: placeholderSvg("#d2ddd5", "#6a7f72"),
         date: "2026-03-26 16:12",
       },
     ],
@@ -230,14 +231,14 @@ const tenants = {
             title: "BRCGS Food Safety",
             expiry: "2027-04-21",
             issuer: "BRCGS",
-            image: placeholderSvg("BRCGS", "#5a8090", "#254757"),
+            image: placeholderSvg("#d2dae0", "#617d91"),
           },
         ],
         evidence: [
           {
             title: "Cold chain compliance images",
             note: "Temperature monitors photographed at loading point.",
-            image: placeholderSvg("Cold chain", "#87a8b2", "#48616a"),
+            image: placeholderSvg("#d8e0e3", "#6f8791"),
           },
         ],
       },
@@ -254,14 +255,14 @@ const tenants = {
             title: "ISCC PLUS",
             expiry: "2026-10-10",
             issuer: "ISCC",
-            image: placeholderSvg("ISCC", "#7c9b69", "#334b2a"),
+            image: placeholderSvg("#dde0cb", "#7e8a5b"),
           },
         ],
         evidence: [
           {
             title: "Bio-based resin invoice evidence",
             note: "Invoice and stock photos mapped to batch numbers.",
-            image: placeholderSvg("Bio resin", "#91a15a", "#57602b"),
+            image: placeholderSvg("#e0d7b8", "#8b7e49"),
           },
         ],
       },
@@ -269,37 +270,49 @@ const tenants = {
   },
 };
 
-const defaultRole = document.body.dataset.defaultRole || "store";
+const page = document.body.dataset.page || "home";
 const routePrefix = document.body.dataset.routePrefix || ".";
 const initialTenantId = new URLSearchParams(window.location.search).get("tenant");
 
 const state = {
   tenantId: tenants[initialTenantId] ? initialTenantId : "evergreen",
-  role: ["store", "admin", "executive"].includes(defaultRole) ? defaultRole : "store",
-  selectedNodeId: "packaging",
+  selectedSupplierId: null,
 };
 
 const els = {
   tenantSelect: document.getElementById("tenant-select"),
   tenantNote: document.getElementById("tenant-note"),
-  personaSwitch: document.getElementById("persona-switch"),
-  summaryStrip: document.getElementById("summary-strip"),
-  heroSynopsis: document.getElementById("hero-synopsis"),
-  heroImage: document.getElementById("hero-image"),
-  heroCaptionTitle: document.getElementById("hero-caption-title"),
-  heroCaptionCopy: document.getElementById("hero-caption-copy"),
+  roleNav: document.getElementById("role-nav"),
+  roleCardGrid: document.getElementById("role-card-grid"),
+  storeQuickGrid: document.getElementById("store-quick-grid"),
   storeName: document.getElementById("store-name"),
   evidenceList: document.getElementById("evidence-list"),
+  storeForm: document.getElementById("store-form"),
   metricGrid: document.getElementById("metric-grid"),
+  reviewList: document.getElementById("review-list"),
+  logisticsForm: document.getElementById("logistics-form"),
   logisticsList: document.getElementById("logistics-list"),
+  generateReport: document.getElementById("generate-report"),
   reportOutput: document.getElementById("report-output"),
-  supplyChainList: document.getElementById("supply-chain-list"),
+  executiveKpis: document.getElementById("executive-kpis"),
+  supplierList: document.getElementById("supplier-list"),
   detailTitle: document.getElementById("detail-title"),
   detailPanel: document.getElementById("detail-panel"),
-  storeForm: document.getElementById("store-form"),
-  logisticsForm: document.getElementById("logistics-form"),
-  generateReport: document.getElementById("generate-report"),
-  views: Array.from(document.querySelectorAll(".view-panel")),
+};
+
+const roleMeta = {
+  store: {
+    label: "Store manager",
+    description: "Upload photos, enter material type and weight, and send clean evidence before collection cut-off.",
+  },
+  admin: {
+    label: "ESG admin",
+    description: "Review incoming evidence, log operational records, and prepare reporting output.",
+  },
+  executive: {
+    label: "Executive",
+    description: "Track footprint by supplier, inspect evidence, and review supporting credentials.",
+  },
 };
 
 function activeTenant() {
@@ -310,7 +323,7 @@ function formatKg(value) {
   return `${Number(value).toFixed(1)} kg`;
 }
 
-function routeForRole(roleId) {
+function routeFor(roleId) {
   const params = new URLSearchParams();
   params.set("tenant", state.tenantId);
   return `${routePrefix}/${roleId}/?${params.toString()}`;
@@ -322,7 +335,48 @@ function syncTenantQueryParam() {
   window.history.replaceState({}, "", url);
 }
 
-function renderTenants() {
+function reviewQueueForTenant(tenant) {
+  const latestEvidence = tenant.evidence[0];
+  const supplier = tenant.suppliers[0];
+  const logistics = tenant.logistics[0];
+  return [
+    {
+      title: `${latestEvidence.store} evidence review`,
+      copy: `${latestEvidence.materialType} entry at ${formatKg(latestEvidence.weightKg)} is waiting for admin validation.`,
+    },
+    {
+      title: `${supplier.name} credential check`,
+      copy: `${supplier.certificates[0].title} is on file. Confirm expiry and supplier coverage before reporting.`,
+    },
+    {
+      title: `${logistics.lane} transport record`,
+      copy: `${logistics.mode} lane logged at ${logistics.carbonKg} kgCO2e. Confirm load factor assumptions.`,
+    },
+  ];
+}
+
+function reportSummaryForTenant(tenant) {
+  const totalObservedKg = tenant.evidence
+    .reduce((sum, item) => sum + Number(item.weightKg), 0)
+    .toFixed(1);
+  const totalLogisticsKg = tenant.logistics.reduce((sum, item) => sum + item.carbonKg, 0);
+  const topSupplier = tenant.suppliers.slice().sort((a, b) => b.carbonTco2e - a.carbonTco2e)[0];
+
+  return `
+    <h3>${tenant.name} draft report</h3>
+    <p>${tenant.name} is reporting ${tenant.kpis.carbon} across its mapped footprint for the ${tenant.reportingCycle.toLowerCase()}.</p>
+    <p>Store and facility teams submitted ${tenant.evidence.length} recent evidence entries covering ${totalObservedKg} kg of observed materials, each linked to location and note metadata.</p>
+    <p>Current logistics records contribute ${totalLogisticsKg} kgCO2e in the working draft, while the highest emitting mapped supplier is ${topSupplier.name} at ${topSupplier.carbonTco2e} tCO2e.</p>
+    <ul>
+      <li>Keep measured values separate from estimates.</li>
+      <li>Maintain links to evidence and supplier credentials.</li>
+      <li>Require human approval before final publication.</li>
+    </ul>
+  `;
+}
+
+function renderTenantSelect() {
+  if (!els.tenantSelect) return;
   els.tenantSelect.innerHTML = Object.values(tenants)
     .map(
       (tenant) =>
@@ -331,67 +385,93 @@ function renderTenants() {
     .join("");
 }
 
-function renderPersonaSwitch() {
-  const items = [
-    { id: "store", label: "Store manager" },
-    { id: "admin", label: "ESG admin" },
-    { id: "executive", label: "Executive" },
-  ];
-  els.personaSwitch.innerHTML = items
+function renderRoleNav() {
+  if (!els.roleNav) return;
+  const items = ["store", "admin", "executive"];
+  els.roleNav.innerHTML = items
+    .map((roleId) => {
+      const isActive = page === roleId;
+      return `<a class="role-link ${isActive ? "is-active" : ""}" href="${routeFor(roleId)}" ${isActive ? 'aria-current="page"' : ""}>${roleMeta[roleId].label}</a>`;
+    })
+    .join("");
+}
+
+function renderTenantNote() {
+  if (!els.tenantNote) return;
+  const tenant = activeTenant();
+
+  if (page === "store") {
+    els.tenantNote.textContent = `${tenant.store.name} • ${tenant.store.manager} • ${tenant.store.shiftWindow}`;
+    return;
+  }
+
+  if (page === "admin") {
+    els.tenantNote.textContent = `${tenant.name} is on the ${tenant.reportingCycle} with ${tenant.kpis.storesReporting} reporting sites and ${tenant.kpis.evidenceLinked} linked evidence files.`;
+    return;
+  }
+
+  if (page === "executive") {
+    els.tenantNote.textContent = `${tenant.name} spans ${tenant.footprint} with ${tenant.kpis.supplierCoverage} supplier coverage across the mapped supply chain.`;
+    return;
+  }
+
+  els.tenantNote.textContent = `${tenant.name} • ${tenant.industry} • ${tenant.footprint}`;
+}
+
+function renderHome() {
+  if (!els.roleCardGrid) return;
+  els.roleCardGrid.innerHTML = Object.entries(roleMeta)
     .map(
-      (item) =>
-        `<a class="persona-chip ${item.id === state.role ? "active" : ""}" href="${routeForRole(item.id)}" ${item.id === state.role ? 'aria-current="page"' : ""}>${item.label}</a>`
+      ([roleId, meta]) => `
+        <article class="role-card">
+          <p class="eyebrow">${meta.label}</p>
+          <h2>${meta.label} workspace</h2>
+          <p>${meta.description}</p>
+          <a class="primary-button" href="${routeFor(roleId)}">Open workspace</a>
+        </article>
+      `
     )
     .join("");
 }
 
-function renderSummary() {
+function renderStorePage() {
+  if (!els.storeQuickGrid || !els.storeName || !els.evidenceList) return;
   const tenant = activeTenant();
-  els.tenantNote.textContent = `${tenant.industry}. ${tenant.footprint}. Reporting cycle: ${tenant.reportingCycle}.`;
-  const summaryCards = [
-    { label: "Carbon footprint", value: tenant.kpis.carbon, helper: "Across the mapped tenant network" },
-    { label: "Sites reporting", value: tenant.kpis.storesReporting, helper: "Store and facility participation" },
-    { label: "Supplier coverage", value: tenant.kpis.supplierCoverage, helper: "Suppliers with mapped credentials" },
-    { label: "Evidence linked", value: tenant.kpis.evidenceLinked, helper: "Photos, certificates, and logs" },
-  ];
-  els.summaryStrip.innerHTML = summaryCards
-    .map(
-      (item) =>
-        `<article class="summary-card"><p class="eyebrow">${item.label}</p><strong>${item.value}</strong><span>${item.helper}</span></article>`
-    )
-    .join("");
-}
 
-function renderHero() {
-  const tenant = activeTenant();
-  const featuredEvidence = tenant.evidence[0];
-  els.heroSynopsis.textContent =
-    `${tenant.name} brings together store evidence, logistics signals, and supplier credentials for ${tenant.footprint.toLowerCase()}.`;
-  els.heroImage.src = featuredEvidence.image;
-  els.heroCaptionTitle.textContent = featuredEvidence.title;
-  els.heroCaptionCopy.textContent =
-    `${featuredEvidence.store} documents ${featuredEvidence.materialType.toLowerCase()} at ${formatKg(featuredEvidence.weightKg)}. ${featuredEvidence.note}`;
-}
-
-function renderStoreView() {
-  const tenant = activeTenant();
   els.storeName.textContent = `${tenant.store.name} • ${tenant.store.manager}`;
+
+  els.storeQuickGrid.innerHTML = [
+    { label: "Submitted today", value: tenant.store.submittedToday, helper: "Uploads synced" },
+    { label: "Still needed", value: tenant.store.pendingToday, helper: "Open capture tasks" },
+    { label: "Latest sync", value: "2m", helper: tenant.store.shiftWindow },
+  ]
+    .map(
+      (item) => `
+        <article class="quick-card">
+          <p class="eyebrow">${item.label}</p>
+          <strong>${item.value}</strong>
+          <span>${item.helper}</span>
+        </article>
+      `
+    )
+    .join("");
+
   els.evidenceList.innerHTML = tenant.evidence
     .slice()
     .reverse()
     .map(
       (item) => `
-        <article class="evidence-item">
-          <div class="evidence-thumb"><img src="${item.image}" alt="${item.title}" /></div>
-          <div class="evidence-meta">
-            <h4>${item.title}</h4>
-            <div class="mini-meta">
-              <span>${item.store}</span>
+        <article class="simple-item media-item">
+          <div class="media-thumb"><img src="${item.image}" alt="${item.title}" /></div>
+          <div>
+            <strong>${item.title}</strong>
+            <div class="meta-row">
               <span>${item.materialType}</span>
               <span>${formatKg(item.weightKg)}</span>
-              <span>${item.date}</span>
+              <span>${item.zone}</span>
             </div>
             <p>${item.note}</p>
+            <span>${item.date}</span>
           </div>
         </article>
       `
@@ -399,91 +479,76 @@ function renderStoreView() {
     .join("");
 }
 
-function renderAdminView() {
+function renderAdminPage() {
   const tenant = activeTenant();
-  els.metricGrid.innerHTML = [
-    {
-      title: "Scope 1 + 2",
-      value: tenant.kpis.carbon,
-      helper: "Latest modelled total",
-    },
-    {
-      title: "Evidence freshness",
-      value: `${tenant.evidence.length} live`,
-      helper: "Recent store submissions",
-    },
-    {
-      title: "Open review items",
-      value: `${Math.max(3, tenant.evidence.length - 1)}`,
-      helper: "Awaiting admin decision",
-    },
-    {
-      title: "Supplier credentials",
-      value: `${tenant.suppliers.reduce((sum, s) => sum + s.certificates.length, 0)}`,
-      helper: "Certificates on file",
-    },
-  ]
-    .map(
-      (metric) => `
-        <article class="metric-card">
-          <p class="eyebrow">${metric.title}</p>
-          <strong>${metric.value}</strong>
-          <span>${metric.helper}</span>
-        </article>
-      `
-    )
-    .join("");
 
-  els.logisticsList.innerHTML = tenant.logistics
-    .map(
-      (entry) => `
-        <article class="table-row">
-          <strong>${entry.lane}</strong>
-          <span>${entry.mode} • ${entry.distanceKm} km • ${entry.loadKg} kg load • ${entry.carbonKg} kgCO2e</span>
-        </article>
-      `
-    )
-    .join("");
-}
+  if (els.metricGrid) {
+    els.metricGrid.innerHTML = [
+      { label: "Carbon", value: tenant.kpis.carbon, helper: "Current working footprint" },
+      { label: "Sites reporting", value: tenant.kpis.storesReporting, helper: "Submitted this cycle" },
+      { label: "Supplier coverage", value: tenant.kpis.supplierCoverage, helper: "Mapped supplier credentials" },
+      { label: "Evidence linked", value: tenant.kpis.evidenceLinked, helper: "Photos and files attached" },
+    ]
+      .map(
+        (item) => `
+          <article class="kpi-card">
+            <p class="eyebrow">${item.label}</p>
+            <strong>${item.value}</strong>
+            <span>${item.helper}</span>
+          </article>
+        `
+      )
+      .join("");
+  }
 
-function renderExecutiveView() {
-  const tenant = activeTenant();
-  els.supplyChainList.innerHTML = tenant.suppliers
-    .map(
-      (supplier) => `
-        <button class="supply-node ${supplier.id === state.selectedNodeId ? "is-active" : ""}" data-node-id="${supplier.id}">
-          <strong>${supplier.name}</strong>
-          <span>${supplier.role} • ${supplier.region}</span>
-          <span>${supplier.carbonTco2e} tCO2e • ${supplier.share} of tenant footprint • ${supplier.evidenceCount} evidence items</span>
-        </button>
-      `
-    )
-    .join("");
+  if (els.reviewList) {
+    els.reviewList.innerHTML = reviewQueueForTenant(tenant)
+      .map(
+        (item) => `
+          <article class="simple-item">
+            <strong>${item.title}</strong>
+            <p>${item.copy}</p>
+          </article>
+        `
+      )
+      .join("");
+  }
 
-  els.supplyChainList.querySelectorAll("button").forEach((button) => {
-    button.addEventListener("click", () => {
-      state.selectedNodeId = button.dataset.nodeId;
-      renderExecutiveDetail();
-    });
-  });
+  if (els.logisticsList) {
+    els.logisticsList.innerHTML = tenant.logistics
+      .map(
+        (entry) => `
+          <article class="simple-item">
+            <strong>${entry.lane}</strong>
+            <p>${entry.mode} • ${entry.distanceKm} km • ${entry.loadKg} kg load</p>
+            <span>${entry.carbonKg} kgCO2e</span>
+          </article>
+        `
+      )
+      .join("");
+  }
 
-  renderExecutiveDetail();
+  if (els.reportOutput) {
+    els.reportOutput.innerHTML = reportSummaryForTenant(tenant);
+  }
 }
 
 function renderExecutiveDetail() {
+  if (!els.detailTitle || !els.detailPanel) return;
   const tenant = activeTenant();
   const supplier =
-    tenant.suppliers.find((item) => item.id === state.selectedNodeId) || tenant.suppliers[0];
-  state.selectedNodeId = supplier.id;
+    tenant.suppliers.find((item) => item.id === state.selectedSupplierId) || tenant.suppliers[0];
+  state.selectedSupplierId = supplier.id;
+
   els.detailTitle.textContent = supplier.name;
 
   const evidenceMarkup = supplier.evidence
     .map(
       (item) => `
-        <div class="gallery-item">
-          <div class="evidence-thumb"><img src="${item.image}" alt="${item.title}" /></div>
-          <strong>${item.title}</strong>
-          <span class="detail-meta">${item.note}</span>
+        <div class="detail-block">
+          <h3>${item.title}</h3>
+          <div class="media-thumb"><img src="${item.image}" alt="${item.title}" /></div>
+          <p>${item.note}</p>
         </div>
       `
     )
@@ -494,9 +559,9 @@ function renderExecutiveDetail() {
       (cert) => `
         <div class="certificate-row">
           <div class="certificate-thumb"><img src="${cert.image}" alt="${cert.title}" /></div>
-          <div class="certificate-copy">
-            <p><strong>${cert.title}</strong></p>
-            <span>${cert.issuer}</span><br />
+          <div>
+            <strong>${cert.title}</strong>
+            <p>${cert.issuer}</p>
             <span class="mono">Expires ${cert.expiry}</span>
           </div>
         </div>
@@ -505,155 +570,165 @@ function renderExecutiveDetail() {
     .join("");
 
   els.detailPanel.innerHTML = `
-    <section class="detail-section">
-      <div class="detail-kpis">
-        <div class="detail-kpi">
-          <p class="eyebrow">Carbon</p>
-          <strong>${supplier.carbonTco2e}</strong>
-          <span>tCO2e</span>
-        </div>
-        <div class="detail-kpi">
-          <p class="eyebrow">Footprint share</p>
-          <strong>${supplier.share}</strong>
-          <span>Of tenant emissions</span>
-        </div>
-        <div class="detail-kpi">
-          <p class="eyebrow">Evidence linked</p>
-          <strong>${supplier.evidenceCount}</strong>
-          <span>Files in audit trail</span>
-        </div>
-      </div>
+    <section class="detail-grid">
+      <article class="detail-block">
+        <p class="eyebrow">Carbon</p>
+        <strong>${supplier.carbonTco2e}</strong>
+        <span>tCO2e</span>
+      </article>
+      <article class="detail-block">
+        <p class="eyebrow">Footprint share</p>
+        <strong>${supplier.share}</strong>
+        <span>Of tenant emissions</span>
+      </article>
+      <article class="detail-block">
+        <p class="eyebrow">Evidence linked</p>
+        <strong>${supplier.evidenceCount}</strong>
+        <span>Files in audit trail</span>
+      </article>
     </section>
-    <section class="detail-section">
-      <p class="eyebrow">Evidence trail</p>
-      <div class="gallery">${evidenceMarkup}</div>
+    <section class="detail-block">
+      <h3>Supplier evidence</h3>
+      ${evidenceMarkup}
     </section>
-    <section class="detail-section">
-      <p class="eyebrow">Supplier certificates</p>
-      <div class="certificate-list">${certificateMarkup}</div>
+    <section class="detail-block">
+      <h3>Certificates and qualifications</h3>
+      ${certificateMarkup}
     </section>
   `;
 }
 
-function renderReportOutput() {
+function renderExecutivePage() {
   const tenant = activeTenant();
-  const wasteTotal = tenant.evidence
-    .reduce((sum, item) => sum + Number(item.weightKg), 0)
-    .toFixed(1);
-  const logisticsCarbon = tenant.logistics.reduce((sum, item) => sum + item.carbonKg, 0);
-  const highestSupplier = tenant.suppliers
-    .slice()
-    .sort((a, b) => b.carbonTco2e - a.carbonTco2e)[0];
+  if (!tenant.suppliers.length) return;
+  if (!state.selectedSupplierId) {
+    state.selectedSupplierId = tenant.suppliers[0].id;
+  }
 
-  els.reportOutput.innerHTML = `
-    <h4>${tenant.name} ESG draft report</h4>
-    <p>
-      ${tenant.name} is currently reporting ${tenant.kpis.carbon} across its operational
-      and upstream footprint, with ${tenant.kpis.storesReporting} reporting sites and
-      ${tenant.kpis.supplierCoverage} supplier coverage in the mapped supply chain.
-    </p>
-    <p>
-      During the current reporting cycle, stores uploaded ${tenant.evidence.length}
-      evidence submissions representing ${wasteTotal} kg of material observations, each
-      attached to store-level notes and photo evidence for audit review.
-    </p>
-    <p>
-      Logistics records in scope currently account for ${logisticsCarbon} kgCO2e, with
-      the highest-emitting mapped supply-chain component being ${highestSupplier.name}
-      at ${highestSupplier.carbonTco2e} tCO2e. Executive drill-down remains available
-      for supporting evidence and current certifications.
-    </p>
-    <ul>
-      <li>All generated copy in the final system should remain reviewable before publication.</li>
-      <li>Each KPI should link to source data, evidence photos, and supplier credentials.</li>
-      <li>Tenants need role-based access for store, admin, and executive users.</li>
-    </ul>
-  `;
-}
+  if (els.executiveKpis) {
+    const topSupplier = tenant.suppliers.slice().sort((a, b) => b.carbonTco2e - a.carbonTco2e)[0];
+    els.executiveKpis.innerHTML = [
+      { label: "Total footprint", value: tenant.kpis.carbon, helper: "Current mapped emissions" },
+      { label: "Top supplier", value: topSupplier.name, helper: `${topSupplier.carbonTco2e} tCO2e contribution` },
+      { label: "Supplier coverage", value: tenant.kpis.supplierCoverage, helper: "With evidence and credentials" },
+      { label: "Evidence linked", value: tenant.kpis.evidenceLinked, helper: "Proof available for drill-down" },
+    ]
+      .map(
+        (item) => `
+          <article class="kpi-card">
+            <p class="eyebrow">${item.label}</p>
+            <strong>${item.value}</strong>
+            <span>${item.helper}</span>
+          </article>
+        `
+      )
+      .join("");
+  }
 
-function setActiveView() {
-  els.views.forEach((view) => {
-    view.classList.toggle("active", view.dataset.view === state.role);
-  });
+  if (els.supplierList) {
+    els.supplierList.innerHTML = tenant.suppliers
+      .map(
+        (supplier) => `
+          <button class="supplier-button ${supplier.id === state.selectedSupplierId ? "is-active" : ""}" data-supplier-id="${supplier.id}">
+            <strong>${supplier.name}</strong>
+            <p>${supplier.role} • ${supplier.region}</p>
+            <span>${supplier.carbonTco2e} tCO2e • ${supplier.share} of footprint</span>
+          </button>
+        `
+      )
+      .join("");
+
+    els.supplierList.querySelectorAll("button").forEach((button) => {
+      button.addEventListener("click", () => {
+        state.selectedSupplierId = button.dataset.supplierId;
+        renderExecutivePage();
+      });
+    });
+  }
+
+  renderExecutiveDetail();
 }
 
 function render() {
   syncTenantQueryParam();
-  renderTenants();
-  renderPersonaSwitch();
-  renderHero();
-  renderSummary();
-  renderStoreView();
-  renderAdminView();
-  renderExecutiveView();
-  renderReportOutput();
-  setActiveView();
+  renderTenantSelect();
+  renderRoleNav();
+  renderTenantNote();
+
+  if (page === "home") renderHome();
+  if (page === "store") renderStorePage();
+  if (page === "admin") renderAdminPage();
+  if (page === "executive") renderExecutivePage();
 }
 
-els.tenantSelect.addEventListener("change", (event) => {
-  state.tenantId = event.target.value;
-  const tenant = activeTenant();
-  state.selectedNodeId = tenant.suppliers[0].id;
-  render();
-});
-
-els.storeForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const form = new FormData(event.currentTarget);
-  const tenant = activeTenant();
-  const file = form.get("photo");
-  const image =
-    file && file.size > 0
-      ? URL.createObjectURL(file)
-      : placeholderSvg(form.get("materialType"), "#5f816f", "#2c4b43");
-
-  tenant.evidence.push({
-    title: `${form.get("materialType")} upload`,
-    materialType: String(form.get("materialType")),
-    weightKg: Number(form.get("weightKg")),
-    zone: String(form.get("zone")),
-    store: tenant.store.name,
-    note: String(form.get("notes")),
-    image,
-    date: new Date().toISOString().slice(0, 16).replace("T", " "),
+if (els.tenantSelect) {
+  els.tenantSelect.addEventListener("change", (event) => {
+    state.tenantId = event.target.value;
+    state.selectedSupplierId = null;
+    render();
   });
+}
 
-  renderStoreView();
-  renderAdminView();
-  renderReportOutput();
-  event.currentTarget.reset();
-});
+if (els.storeForm) {
+  els.storeForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const tenant = activeTenant();
+    const file = form.get("photo");
+    const image =
+      file && file.size > 0
+        ? URL.createObjectURL(file)
+        : placeholderSvg("#d8ddd4", "#71806e");
 
-els.logisticsForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const form = new FormData(event.currentTarget);
-  const mode = String(form.get("mode"));
-  const distanceKm = Number(form.get("distanceKm"));
-  const loadKg = Number(form.get("loadKg"));
-  const factor = {
-    "Electric van": 0.04,
-    "Diesel truck": 0.11,
-    "Ocean freight": 0.02,
-    "Air freight": 1.72,
-  }[mode];
+    tenant.evidence.unshift({
+      title: `${form.get("materialType")} upload`,
+      materialType: String(form.get("materialType")),
+      weightKg: Number(form.get("weightKg")),
+      zone: String(form.get("zone")),
+      store: tenant.store.name,
+      note: String(form.get("notes")),
+      image,
+      date: new Date().toISOString().slice(0, 16).replace("T", " "),
+    });
 
-  activeTenant().logistics.unshift({
-    lane: String(form.get("lane")),
-    mode,
-    distanceKm,
-    loadKg,
-    carbonKg: Math.round(distanceKm * loadKg * factor * 0.01),
+    tenant.store.submittedToday += 1;
+    tenant.store.pendingToday = Math.max(0, tenant.store.pendingToday - 1);
+    renderStorePage();
+    event.currentTarget.reset();
   });
+}
 
-  renderAdminView();
-  renderReportOutput();
-  event.currentTarget.reset();
-});
+if (els.logisticsForm) {
+  els.logisticsForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const mode = String(form.get("mode"));
+    const distanceKm = Number(form.get("distanceKm"));
+    const loadKg = Number(form.get("loadKg"));
+    const factor = {
+      "Electric van": 0.04,
+      "Diesel truck": 0.11,
+      "Ocean freight": 0.02,
+      "Air freight": 1.72,
+    }[mode];
 
-els.generateReport.addEventListener("click", () => {
-  renderReportOutput();
-  state.role = "admin";
-  render();
-});
+    activeTenant().logistics.unshift({
+      lane: String(form.get("lane")),
+      mode,
+      distanceKm,
+      loadKg,
+      carbonKg: Math.round(distanceKm * loadKg * factor * 0.01),
+    });
+
+    renderAdminPage();
+    event.currentTarget.reset();
+  });
+}
+
+if (els.generateReport) {
+  els.generateReport.addEventListener("click", () => {
+    renderAdminPage();
+  });
+}
 
 render();
