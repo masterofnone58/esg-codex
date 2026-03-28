@@ -269,9 +269,13 @@ const tenants = {
   },
 };
 
+const defaultRole = document.body.dataset.defaultRole || "store";
+const routePrefix = document.body.dataset.routePrefix || ".";
+const initialTenantId = new URLSearchParams(window.location.search).get("tenant");
+
 const state = {
-  tenantId: "evergreen",
-  role: "store",
+  tenantId: tenants[initialTenantId] ? initialTenantId : "evergreen",
+  role: ["store", "admin", "executive"].includes(defaultRole) ? defaultRole : "store",
   selectedNodeId: "packaging",
 };
 
@@ -306,6 +310,18 @@ function formatKg(value) {
   return `${Number(value).toFixed(1)} kg`;
 }
 
+function routeForRole(roleId) {
+  const params = new URLSearchParams();
+  params.set("tenant", state.tenantId);
+  return `${routePrefix}/${roleId}/?${params.toString()}`;
+}
+
+function syncTenantQueryParam() {
+  const url = new URL(window.location.href);
+  url.searchParams.set("tenant", state.tenantId);
+  window.history.replaceState({}, "", url);
+}
+
 function renderTenants() {
   els.tenantSelect.innerHTML = Object.values(tenants)
     .map(
@@ -324,15 +340,9 @@ function renderPersonaSwitch() {
   els.personaSwitch.innerHTML = items
     .map(
       (item) =>
-        `<button class="persona-chip ${item.id === state.role ? "active" : ""}" data-role="${item.id}">${item.label}</button>`
+        `<a class="persona-chip ${item.id === state.role ? "active" : ""}" href="${routeForRole(item.id)}" ${item.id === state.role ? 'aria-current="page"' : ""}>${item.label}</a>`
     )
     .join("");
-  els.personaSwitch.querySelectorAll("button").forEach((button) => {
-    button.addEventListener("click", () => {
-      state.role = button.dataset.role;
-      render();
-    });
-  });
 }
 
 function renderSummary() {
@@ -568,6 +578,7 @@ function setActiveView() {
 }
 
 function render() {
+  syncTenantQueryParam();
   renderTenants();
   renderPersonaSwitch();
   renderHero();
